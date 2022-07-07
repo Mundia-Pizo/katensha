@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:katensha/screens/doctor_detail_page.dart';
+
+import '../models/doctorModel.dart';
 
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+   HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Doctors> doctors = [
+    Doctors(name: "Jane Russel", description: "Doctor Jane Russel, Paediatrics doctor, 15 years, known for the best surgeries on kids including the famous sepearation of the two kids in germany", imageURL: "doctor1.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "Glady's Murphy", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL: "Doctor3.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "Jorge Henry", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL: "Doctor2.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "Philip Fox", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL:"doctor_judy.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "Debra Hawkins", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL: "doctor1.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "Jacob Pena", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working",imageURL: "Doctor2.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "Andrey Jones", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL: "Doctor3.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "John Wick", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL: "doctor1.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+    Doctors(name: "John Wick", description: "Neural Surgeon, worked for john Hopkins Hospital for 5 years, practitioner in Ben Carson's surgery, Smart and hard working", imageURL:"doctor_judy.jpg", bio: "BSC Medicine, MSC Paedriatrics, Doctorate Suugery"),
+  ];
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -81,122 +96,45 @@ class _HomePageState extends State<HomePage> {
             const Text('Top doctors', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
             const SizedBox(height: 15,),
             //list of top doctors 
-        //     ListView.builder(
-        //       itemCount: chatUsers.length,
-        //       shrinkWrap: true,
-        //       padding: const EdgeInsets.only(top: 16),
-        //       physics: const NeverScrollableScrollPhysics(),
-        //       itemBuilder: (context, index){
-        //         return ConversationList(
-        //           name: chatUsers[index].name,
-        //           messageText: chatUsers[index].messageText,
-        //           imageUrl: chatUsers[index].imageURL,
-        //           time: chatUsers[index].time,
-        //           isMessageRead: (index == 0 || index == 3)?true:false,
-        //     );
-        //   },
-        // ),
+            ListView.builder(
+              itemCount: doctors.length,
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(top: 16),
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index){
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                   context,
+                   MaterialPageRoute(builder: (context) => DoctorDetailPage(doctor: doctors[index]))
+                  );
+                },
+              child:Card(child: Row(
+              children:[
+              // Image(image:AssetImage('iphone13.jpg'), fit: BoxFit.fill,),
+              Card(child: Image(image: AssetImage(doctors[index].imageURL)),),
+              const SizedBox(width: 15,),
+              Expanded(child:Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                Text(doctors[index].name, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 28)),
+                Text(doctors[index].bio),
+                const SizedBox(height: 20,),
+                // Text('K400/hr', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+              ],)
+              )
+            ]),
+            ),
+
+                  
+            );
+          },
+        ),
 
         //end of the list of doctors 
-
-            Card(child: Row(
-              children:[
-              // Image(image:AssetImage('iphone13.jpg'), fit: BoxFit.fill,),
-              const Card(child: Image(image: AssetImage('doctor1.jpg')),),
-              const SizedBox(width: 15,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                Text('Dr Rev', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28)),
-                // Expanded(
-                //   flex: 1,
-                //   child: Text('Dr Rev has worked with so many people in the area of paedriatrics and his the best doctor ever')),
-                Text('Paediatric Specialist'),
-                SizedBox(height: 20,),
-                // Text('K400/hr', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              ],)
-              
-            ]),
-            ),
-
-            const SizedBox(height: 15,),
-            Card(child: Row(
-              children:[
-              // Image(image:AssetImage('iphone13.jpg'), fit: BoxFit.fill,),
-              const Card(child: Image(image: AssetImage('Doctor2.jpg')),),
-              const SizedBox(width: 15,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                Text('Dr Carson', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28)),
-                Text('Dental Specialist'),
-                SizedBox(height: 20,),
-                // Text('K400/hr', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              ],)
-              
-            ]),
-            ),
-
-            const SizedBox(height: 15,),
-            Card(child: Row(
-              children:[
-              // Image(image:AssetImage('iphone13.jpg'), fit: BoxFit.fill,),
-              const Card(child: Image(image: AssetImage('Doctor3.jpg')),),
-              const SizedBox(width: 15,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                Text('Dr Imov', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28)),
-                Text('Cardiac Specialist'),
-                SizedBox(height: 20,),
-                // Text('K400/hr', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              ],)
-              
-            ]),
-            ),
-
-             const SizedBox(height: 15,),
-            Card(child: Row(
-              children:[
-              // Image(image:AssetImage('iphone13.jpg'), fit: BoxFit.fill,),
-              const Card(child: Image(image: AssetImage('doctor_judy.jpg')),),
-              const SizedBox(width: 15,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                Text('Dr Moi', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28)),
-                Text('Eye Specialist'),
-                SizedBox(height: 20,),
-                // Text('K400/hr', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              ],)
-              
-            ]),
-            ),
-
-           const SizedBox(height: 15,),
-            Card(child: Row(
-              children:[
-              // Image(image:AssetImage('iphone13.jpg'), fit: BoxFit.fill,),
-              const Card(child: Image(image: AssetImage('doctor1.jpg')),),
-              const SizedBox(width: 15,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                Text('Dr Judy', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28)),
-                Text('Psychatrics Specialist'),
-                SizedBox(height: 20,),
-                // Text('K400/hr', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              ],)
-              
-            ]),
-            ),
-          ],)
-          ),
+       ])
+           )
         );
   }
 }

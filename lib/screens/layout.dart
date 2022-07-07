@@ -18,7 +18,7 @@ class _LayoutState extends State<Layout> {
   // this is where all the state of the app is updated 
   var pageIndex =0;
   final _pageOptions = [
-    const HomePage(),
+    HomePage(),
     const ChatePage(),
     const AccountPage(),
     const DetailPage(),
